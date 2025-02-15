@@ -24,7 +24,12 @@ const errorHandler = (options = {}) => {
             response.error = err.stack;
         }
 
-        res.status(statusCode).json(response);
+        // Ensure that async errors get properly terminated
+        if (!res.headersSent) {
+            res.status(statusCode).json(response);
+        } else {
+            next(err); // Pass to Express error handler if headers sent
+        }
     };
 };
 

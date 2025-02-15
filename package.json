@@ -1,6 +1,6 @@
 {
-  "name": "universal-error-handler",
-  "version": "1.0.0",
+  "name": "express-universal-error-handler",
+  "version": "1.0.1",
   "description": "A universal error handler middleware for Express.js",
   "main": "src/index.js",
   "scripts": {
@@ -9,7 +9,12 @@
     "build": "echo 'No build step needed'",
     "publish": "npm publish"
   },
-  "keywords": ["express", "middleware", "error-handler", "nodejs"],
+  "keywords": [
+    "express",
+    "middleware",
+    "error-handler",
+    "nodejs"
+  ],
   "author": "Your Name",
   "license": "MIT",
   "dependencies": {
@@ -18,5 +23,8 @@
   "devDependencies": {
     "jest": "^29.6.0",
     "supertest": "^6.3.0"
+  },
+  "jest": {
+    "testTimeout": 10000
   }
 }

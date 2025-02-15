@@ -1,18 +1,26 @@
 const request = require('supertest');
 const express = require('express');
 const { errorHandler, CustomError } = require('../src');
+const asyncWrapper = require('../src/asyncWrapper');
 
 const app = express();
+
+// Test: Sync Error
 app.get('/sync-error', () => {
     throw new Error('Sync Error Test');
 });
+
+// Test: Custom Error
 app.get('/custom-error', () => {
     throw new CustomError('Custom Error Test', 400);
 });
-app.get('/async-error', async () => {
-    throw new Error('Async Error Test');
-});
 
+// Test: Async Error (Fixed with asyncWrapper)
+app.get('/async-error', asyncWrapper(async () => {
+    throw new Error('Async Error Test');
+}));
+
+// Use Error Handler Middleware
 app.use(errorHandler());
 
 describe('Error Handler Middleware', () => {
